@@ -114,6 +114,8 @@ Licensed under the terms of the Apache License 2.0. Please see LICENSE file in t
                 <groupId>org.sedis</groupId>
                 <artifactId>sedis_${scala.binary.version}</artifactId>
                 <version>${sedis.version}</version>
+                <scope>system</scope>
+                <systemPath>${basedir}/dependency-jar/sedis_2.10-1.2.2.jar</systemPath>
             </dependency>
             <dependency>
                 <groupId>org.scala-lang</groupId>

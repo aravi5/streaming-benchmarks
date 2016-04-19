@@ -54,6 +54,8 @@
             <groupId>org.sedis</groupId>
             <artifactId>sedis_${scala.binary.version}</artifactId>
             <version>1.2.2</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/dependency-jar/sedis_2.10-1.2.2.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>org.scala-lang</groupId>
