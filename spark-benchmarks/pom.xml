@@ -29,7 +29,7 @@
         </dependency>
         <dependency>
             <groupId>org.apache.kafka</groupId>
-            <artifactId>kafka_${scala.binary.version}</artifactId>
+            <artifactId>kafka-clients</artifactId>
         </dependency>
         <dependency>
             <groupId>redis.clients</groupId>
@@ -47,7 +47,8 @@
         </dependency>
         <dependency>
             <groupId>org.apache.spark</groupId>
-            <artifactId>spark-streaming-kafka_${scala.binary.version}</artifactId>
+            <artifactId>spark-streaming-kafka-v09_2.10</artifactId>
+            <version>1.5.2-mapr-1602</version>
         </dependency>
         <dependency>
             <groupId>org.sedis</groupId>
