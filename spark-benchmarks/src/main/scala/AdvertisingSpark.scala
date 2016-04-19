@@ -13,7 +13,7 @@ import kafka.serializer.StringDecoder
 import org.apache.spark.streaming
 import org.apache.spark.streaming.{Milliseconds, StreamingContext}
 
-import org.apache.spark.streaming.kafka.KafkaUtils
+import org.apache.spark.streaming.kafka.v09.KafkaUtils
 import org.apache.spark.streaming.dstream
 import org.apache.spark.SparkConf
 import org.json.JSONObject
