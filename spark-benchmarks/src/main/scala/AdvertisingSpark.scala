@@ -64,7 +64,7 @@ object KafkaRedisAdvertisingStream {
     val kafkaParams = Map[String, String]("metadata.broker.list" -> brokers, "auto.offset.reset" -> "smallest")
     System.err.println(
       "Trying to connect to Kafka at " + brokers)
-    val messages = KafkaUtils.createDirectStream[String, String, StringDecoder, StringDecoder](
+    val messages = KafkaUtils.createDirectStream[String, String](
       ssc, kafkaParams, topicsSet)
 
     //We can repartition to use more executors if desired
