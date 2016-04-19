@@ -15,8 +15,8 @@ Licensed under the terms of the Apache License 2.0. Please see LICENSE file in t
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <spark.version>1.5.1</spark.version>
-        <kafka.version>0.8.2.1</kafka.version>
+        <spark.version>1.5.2</spark.version>
+        <kafka.version>0.9.0.0-mapr-1602-SNAPSHOT</kafka.version>
         <flink.version>0.10.1</flink.version>
         <storm.version>0.10.0</storm.version>
         <scala.binary.version>2.10</scala.binary.version>
@@ -77,7 +77,7 @@ Licensed under the terms of the Apache License 2.0. Please see LICENSE file in t
             </dependency>
             <dependency>
                 <groupId>org.apache.kafka</groupId>
-                <artifactId>kafka_${scala.binary.version}</artifactId>
+                <artifactId>kafka-clients</artifactId>
                 <version>${kafka.version}</version>
                 <exclusions>
                     <exclusion>
