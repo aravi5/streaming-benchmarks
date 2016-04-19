@@ -53,6 +53,7 @@
         <dependency>
             <groupId>org.sedis</groupId>
             <artifactId>sedis_${scala.binary.version}</artifactId>
+            <version>1.2.2</version>
         </dependency>
         <dependency>
             <groupId>org.scala-lang</groupId>
