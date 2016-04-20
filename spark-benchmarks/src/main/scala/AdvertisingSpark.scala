@@ -10,6 +10,7 @@ package spark.benchmark
 import java.util
 
 import kafka.serializer.StringDecoder
+import org.apache.kafka.clients.consumer.ConsumerConfig
 import org.apache.spark.streaming
 import org.apache.spark.streaming.{Milliseconds, StreamingContext}
 
@@ -61,9 +62,23 @@ object KafkaRedisAdvertisingStream {
     // Create direct kafka stream with brokers and topics
     val topicsSet = Set(topic)
     val brokers = joinHosts(kafkaHosts, kafkaPort)
-    val kafkaParams = Map[String, String]("metadata.broker.list" -> brokers, "auto.offset.reset" -> "smallest")
+    val groupId = "testgroup"
+    val offsetReset = "earliest"
+    val pollTimeout = "5000"
+    /*val kafkaParams = Map[String, String]("metadata.broker.list" -> brokers, "auto.offset.reset" -> "smallest")*/
     System.err.println(
       "Trying to connect to Kafka at " + brokers)
+    val kafkaParams = Map[String, String](
+      ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG -> brokers,
+      ConsumerConfig.GROUP_ID_CONFIG -> groupId,
+      ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG ->
+        "org.apache.kafka.common.serialization.StringDeserializer",
+      ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG ->
+        "org.apache.kafka.common.serialization.StringDeserializer",
+      ConsumerConfig.AUTO_OFFSET_RESET_CONFIG -> offsetReset,
+      ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG -> "false",
+      "spark.kafka.poll.time" -> pollTimeout
+    )
     val messages = KafkaUtils.createDirectStream[String, String](
       ssc, kafkaParams, topicsSet)
 
