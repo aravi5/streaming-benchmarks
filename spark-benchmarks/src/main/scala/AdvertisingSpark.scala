@@ -101,7 +101,7 @@ object KafkaRedisAdvertisingStream {
     projected.print()
 
     //Note that the Storm benchmark caches the results from Redis, we don't do that here yet
-    /*val redisJoined = projected.mapPartitions(queryRedisTopLevel(_, redisHost), false)
+    val redisJoined = projected.mapPartitions(queryRedisTopLevel(_, redisHost), false)
 
     val campaign_timeStamp = redisJoined.map(campaignTime(_))
     //each record in the RDD: key:(campaign_id : String, window_time: Long),  Value: (ad_id : String)
@@ -120,7 +120,7 @@ object KafkaRedisAdvertisingStream {
     //    val totalEventsPerCampaignTime_repartitioned = totalEventsPerCampaignTime.repartition(20)
 
     val final_results = totalEventsPerCampaignTime.mapPartitions(writeRedisTopLevel(_, redisHost), false)
-    val counts = final_results.count().print()*/
+    val counts = final_results.count().print()
 
     // Start the computation
     ssc.start
