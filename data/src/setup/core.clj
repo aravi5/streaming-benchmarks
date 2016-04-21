@@ -95,7 +95,7 @@
                                   "\", \"event_time\": \"" (str (+ start-time (* n 10) skew late-by))
                                   "\", \"ip_address\": \"1.2.3.4\"}")]
                 (.write kafka-o (str json-str "\n"))
-                (send p (record "ad-events" (.getBytes json-str))))))))))))
+                (send p (record "/adstream:ad-events" (.getBytes json-str))))))))))))
 
 ;; Returns a map campaign-id->(timestamp->count)
 (defn dostats []
