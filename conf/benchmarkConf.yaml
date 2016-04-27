@@ -9,7 +9,7 @@ zookeeper.servers:
 
 kafka.port: 9092
 zookeeper.port: 5181
-redis.host: "localhost"
+redis.host: "localhost:6379"
 kafka.topic: "/adstream:ad-events"
 kafka.partitions: 1
 

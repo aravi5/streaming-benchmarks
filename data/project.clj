@@ -7,7 +7,8 @@
                  [org.clojars.tavisrudd/redis-clojure "1.3.1"]
                  [clj-json "0.5.3"]
                  [clj-yaml "0.4.0"]
-                 [org.apache.kafka/kafka-clients "0.9.0.0-mapr-1602-SNAPSHOT"]]
+                 [org.apache.kafka/kafka-clients "0.9.0.0-mapr-1602-SNAPSHOT"]
+                 [com.mapr.streams/mapr-streams "5.2.0-mapr-SNAPSHOT"]]
   :repositories [["mapr.com" "http://maven.corp.maprtech.com/nexus/content/groups/public/"]]
   :main setup.core
   :jvm-opts ["-Xmx8g" "-server"]
