@@ -291,7 +291,7 @@
    ["-w" "--with-skew" "Add minor skew and late tuples into the mix."]
    ["-g" "--get-stats" "Read through redis and collect stats on end-to-end latency and so forth for the real-time simulation."]
    ["-a" "--configPath PATH" "Path to config yaml file"
-    :default "./benchmarkConf.yaml"
+    :default "../conf/benchmarkConf.yaml"
     :parse-fn #(String/valueOf %)]])
 
 (defn -main
