@@ -4,8 +4,10 @@
 (ns setup.core
   (:import java.util.UUID)
   (:import java.io.FileNotFoundException)
-  (:require [clj-kafka.new.producer :refer :all]
-            [redis.core :as redis]
+  (:import [org.apache.kafka.clients.producer Callback KafkaProducer ProducerRecord RecordMetadata]
+           [org.apache.kafka.common.serialization Serializer ByteArraySerializer StringSerializer]
+           [java.util Properties])
+  (:require [redis.core :as redis]
             [clojure.java.io :as io]
             [clj-json.core :as json]
             [clojure.tools.cli :as cli]
@@ -58,10 +60,26 @@
               (println (str "{ \""ad "\": \"" campaign "\"}"))
               (redis/set ad campaign))))))))
 
+(defn producer
+  "Returns a KafkaProducer for produce records to Streams"
+  [^java.util.Properties config ^Serializer key-serializer ^Serializer value-serializer]
+  (KafkaProducer. config key-serializer value-serializer))
+
+(defn record
+  "Returns a ProducerRecord which will be sent to Streams"
+  ([topic value]
+    (ProducerRecord. topic value))
+  ([topic key value]
+    (ProducerRecord. topic key value))
+  ([topic partition key value]
+    (ProducerRecord. topic partition key value)))
+
 (defn write-to-kafka [ads kafka-hosts]
   ;; Put some crap in Kafka
   (println "Setting up kafka topic.")
-  (with-open [p (producer {"bootstrap.servers" kafka-hosts}
+  (with-open [p (producer {"bootstrap.servers" kafka-hosts
+                            "request.required.acks", "1"
+                            "streams.parallel.flushers.per.partition", "false"}
                           (byte-array-serializer)
                           (byte-array-serializer))]
     (println "Creating kafka senders.")
@@ -188,7 +206,9 @@
         start-time-ns (* 1000000 (System/currentTimeMillis))
         period-ns (long (/ 1000000000 throughput))
         times (map #(+ (* period-ns %) start-time-ns) (range))]
-    (with-open [p (producer {"bootstrap.servers" kafka-hosts}
+    (with-open [p (producer {"bootstrap.servers" kafka-hosts
+                            "streams.parallel.flushers.per.partition" "false"
+                            "request.required.acks" "1"}
                             (byte-array-serializer)
                             (byte-array-serializer))]
       (doseq [t times]
