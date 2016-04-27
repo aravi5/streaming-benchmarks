@@ -74,6 +74,11 @@
   ([topic partition key value]
     (ProducerRecord. topic partition key value)))
 
+(defn byte-array-serializer
+  "Returns ByteArraySerializer"
+  []
+  (ByteArraySerializer.))
+
 (defn write-to-kafka [ads kafka-hosts]
   ;; Put some crap in Kafka
   (println "Setting up kafka topic.")
