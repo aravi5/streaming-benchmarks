@@ -62,7 +62,7 @@
 
 (defn producer
   "Returns a KafkaProducer for produce records to Streams"
-  [^java.util.Properties config ^Serializer key-serializer ^Serializer value-serializer]
+  [^java.util.Map config ^Serializer key-serializer ^Serializer value-serializer]
   (KafkaProducer. config key-serializer value-serializer))
 
 (defn record
