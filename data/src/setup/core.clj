@@ -118,7 +118,7 @@
                                   "\", \"event_time\": \"" (str (+ start-time (* n 10) skew late-by))
                                   "\", \"ip_address\": \"1.2.3.4\"}")]
                 (.write kafka-o (str json-str "\n"))
-                (send p (record "/adstream:ad-events" (.getBytes json-str))))))))))))
+                (.send p (record "/adstream:ad-events" (.getBytes json-str))))))))))))
 
 ;; Returns a map campaign-id->(timestamp->count)
 (defn dostats []
@@ -224,7 +224,7 @@
             (future
               (if (> cur (+ t 100))
                 (println "Falling behind by:" (- cur t) "ms"))))
-          (send p (record "ad-events"
+          (.send p (record "ad-events"
                           (.getBytes (make-kafka-event-at t with-skew? ads user-ids page-ids)))))))))
 
 (defn do-new-setup [redis-host]
