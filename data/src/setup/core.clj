@@ -224,7 +224,7 @@
             (future
               (if (> cur (+ t 100))
                 (println "Falling behind by:" (- cur t) "ms"))))
-          (.send p (record "ad-events"
+          (.send p (record "/adstream:ad-events"
                           (.getBytes (make-kafka-event-at t with-skew? ads user-ids page-ids)))))))))
 
 (defn do-new-setup [redis-host]
