@@ -205,6 +205,7 @@ object KafkaRedisAdvertisingStream {
     val campaign = campaign_window_pair._1
     val window_timestamp = campaign_window_pair._2.toString
     val window_seenCount = campaign_window_counts._2
+    System.err.println("Campaign: " + campaign + ", Seen Count: " + window_seenCount)
     pool.withJedisClient { client =>
 
       val dressUp = Dress.up(client)
