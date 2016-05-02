@@ -76,7 +76,7 @@ object KafkaRedisAdvertisingStream {
       ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG ->
         "org.apache.kafka.common.serialization.StringDeserializer",
       ConsumerConfig.AUTO_OFFSET_RESET_CONFIG -> offsetReset,
-      ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG -> "false",
+      ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG -> "true",
       "spark.kafka.poll.time" -> pollTimeout
     )
     val messages = KafkaUtils.createDirectStream[String, String](
