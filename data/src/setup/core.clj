@@ -169,9 +169,9 @@
                              (let [window-key (redis/hget campaign window-time)
                                    seen (redis/hget window-key "seen_count")
                                    time_updated (redis/hget window-key "time_updated")]
-				;;(println "Window key: " window-key)
-                                ;;(println "Seen: " seen)
-                                ;;(println "Time Updated: " time_updated)
+                                  ;;(println "Window key: " window-key)
+                                  ;;(println "Seen: " seen)
+                                  ;;(println "Time Updated: " time_updated)
                                [seen (- (Long/parseLong time_updated) (Long/parseLong window-time))]))))))))))))
 
 (defn gen-ads [redis-host]
