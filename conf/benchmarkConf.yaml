@@ -9,9 +9,9 @@ zookeeper.servers:
 
 kafka.port: 9092
 zookeeper.port: 5181
-redis.host: "10.10.100.185"
-kafka.topic: "/adstream:ad-events"
-kafka.partitions: 1
+redis.host: "10.10.103.49"
+kafka.topic: "/ad-volume/adstream:ad-events"
+kafka.partitions: 100
 
 process.hosts: 1
 process.cores: 4

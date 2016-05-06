@@ -118,7 +118,7 @@
                                   "\", \"event_time\": \"" (str (+ start-time (* n 10) skew late-by))
                                   "\", \"ip_address\": \"1.2.3.4\"}")]
                 (.write kafka-o (str json-str "\n"))
-                (.send p (record "/adstream:ad-events" (.getBytes json-str))))))))))))
+                (.send p (record "/ad-volume/adstream:ad-events" (.getBytes json-str))))))))))))
 
 ;; Returns a map campaign-id->(timestamp->count)
 (defn dostats []
@@ -219,15 +219,18 @@
                             "request.required.acks" "1"}
                             (byte-array-serializer)
                             (byte-array-serializer))]
+      (println "Period-ns: " period-ns " Start Time: " start-time-ns)
       (doseq [t times]
         (let [cur (System/currentTimeMillis)
               t (long (/ t 1000000))]
           (if (> t cur)
-            (Thread/sleep (- t cur))
+	    (do
+	      (println "Sleeping for " (str (- t cur)) " ms")
+              (Thread/sleep (- t cur)))
             (future
               (if (> cur (+ t 100))
                 (println "Falling behind by:" (- cur t) "ms"))))
-          (.send p (record "/adstream:ad-events"
+          (.send p (record "/ad-volume/adstream:ad-events"
                           (.getBytes (make-kafka-event-at t with-skew? ads user-ids page-ids)))))))))
 
 (defn do-new-setup [redis-host]
