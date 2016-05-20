@@ -16,7 +16,7 @@ Licensed under the terms of the Apache License 2.0. Please see LICENSE file in t
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <spark.version>1.5.2</spark.version>
+        <spark.version>1.6.1</spark.version>
         <kafka.version>0.9.0.0-mapr-1602-SNAPSHOT</kafka.version>
         <flink.version>0.10.1</flink.version>
         <storm.version>0.10.0</storm.version>
